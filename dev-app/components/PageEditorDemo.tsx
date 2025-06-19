@@ -25,13 +25,20 @@ export const PageEditorDemo = () => {
   ]
   const [message, setMessage] = React.useState<string | null>(null)
   const [pages, setPages] = React.useState(defaultPages)
-  const [activePage, setActivePage] = React.useState(pages[0].id)
+  const [activePage, setActivePage] = React.useState(pages[0]?.id)
   const [newlyAddedPage, setNewlyAddedPage] = React.useState<string | null>(
     null,
   )
 
   function handleDeletePage(id: string) {
-    setPages((prev) => prev.filter((page) => page.id !== id))
+    const newPages = pages.filter((page) => page.id !== id)
+    setPages(newPages)
+
+    if (id === activePage && newPages.length > 0) {
+      requestAnimationFrame(() => {
+        setActivePage(newPages[0].id)
+      })
+    }
   }
 
   function createPage(page: Page, index?: number) {
