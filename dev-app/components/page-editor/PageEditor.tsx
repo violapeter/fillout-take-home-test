@@ -158,22 +158,26 @@ export const PageEditor = ({
           </React.Fragment>
         ))}
       </Reorder.Group>
-      {endingPages.map((page) => (
-        <PageEditorItem
-          {...page}
-          active={activePage === page.id}
-          isNewlyAdded={newlyAddedPage === page.id}
-          key={page.id}
-          id={page.id}
-          name={page.name}
-          onSelect={() => onChangeActive?.(page.id)}
-          onDelete={onDeletePage}
-          onDuplicate={onDuplicatePage}
-          onSetAsFirst={onSetAsFirst}
-          onCopy={onCopy}
-        />
-      ))}
-      <Styled.Between inactive />
+      {endingPages.length > 0 && (
+        <>
+          {endingPages.map((page) => (
+            <PageEditorItem
+              {...page}
+              active={activePage === page.id}
+              isNewlyAdded={newlyAddedPage === page.id}
+              key={page.id}
+              id={page.id}
+              name={page.name}
+              onSelect={() => onChangeActive?.(page.id)}
+              onDelete={onDeletePage}
+              onDuplicate={onDuplicatePage}
+              onSetAsFirst={onSetAsFirst}
+              onCopy={onCopy}
+            />
+          ))}
+          <Styled.Between inactive />
+        </>
+      )}
       <Button icon="Plus" variant="primary" onClick={onAddPage}>
         Add page
       </Button>
