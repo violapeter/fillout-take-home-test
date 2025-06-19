@@ -18,6 +18,7 @@ const Styled = {
     justify-content: center;
     gap: 8px;
     max-width: 1280px;
+    margin: 0 auto;
   `,
   DemoPage: styled.div`
     background: white;
