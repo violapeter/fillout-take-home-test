@@ -11,6 +11,10 @@ const Styled = {
     color: var(--color-gray-200);
     font-weight: 400;
   `,
+  Subtitle: styled.p`
+    color: var(--color-gray-100);
+    font-size: 14px;
+  `,
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
@@ -71,6 +75,16 @@ const presentationMessages = [
   'Love the clarity and structure here. No wasted motion, just smart choices.',
   'This solution doesn’t just work — it teaches. Really impressive.',
   'There’s a calm confidence in this code. I trust it already.',
+  'Everything here just clicks. Clear mind behind this work.',
+  'This is the kind of submission that makes you rethink your own standards.',
+  'Impressive from start to finish — thoughtful, sharp, and clean.',
+  'Code reads like a story, and every part earns its place.',
+  'Hard not to admire this — it’s elegant and rock-solid.',
+  'This is craftsmanship, not just coding. Really stands out.',
+  'There’s a quiet brilliance to this — subtle but powerful.',
+  'Feels like he anticipated every edge case. Impeccable.',
+  'You don’t just see the solution, you see the thinking behind it.',
+  'Instant trust. This person clearly knows what they’re doing.',
 ]
 
 export const DemoLayout = ({
@@ -81,7 +95,7 @@ export const DemoLayout = ({
     return array[Math.floor(Math.random() * array.length)]
   }
 
-  const [message, setMessage] = React.useState(() => '')
+  const [message, setMessage] = React.useState(() => '...')
 
   React.useEffect(() => {
     setMessage(pickRandom(presentationMessages))
@@ -90,7 +104,11 @@ export const DemoLayout = ({
   return (
     <Styled.Wrapper>
       <Styled.Title>Hello Fillout!</Styled.Title>
-      <Styled.DemoPage>{message}</Styled.DemoPage>
+      <Styled.Subtitle>
+        I’d like to respectfully voice your thoughts here (don’t take it too
+        seriously though):
+      </Styled.Subtitle>
+      <Styled.DemoPage>“{message}”</Styled.DemoPage>
       <Styled.PageEditorWrapper>{children}</Styled.PageEditorWrapper>
       <Styled.Footer>
         <a href="https://violapeter-website-static-assets.vercel.app/Peter%20Viola%20-%202025.pdf">
