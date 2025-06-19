@@ -80,12 +80,12 @@ export const PageEditorDemo = () => {
 
   function handleSetAsFirst(id: string) {
     const pageToMove = pages.find((page) => page.id === id)
-    popupMessage(`${pageToMove?.name || 'Page'} set as first`)
+    popupMessage(`"${pageToMove?.name || 'Page'}" set as first`)
   }
 
   function handleCopy(id: string) {
     const pageToCopy = pages.find((page) => page.id === id)
-    popupMessage(`${pageToCopy?.name || 'Page'} copied to clipboard`)
+    popupMessage(`"${pageToCopy?.name || 'Page'}" copied to clipboard`)
   }
 
   function popupMessage(text: string) {

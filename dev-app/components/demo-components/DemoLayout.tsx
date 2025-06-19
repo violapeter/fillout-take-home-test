@@ -7,6 +7,10 @@ interface DemoLayoutProps {
 }
 
 const Styled = {
+  Title: styled.h1`
+    color: var(--color-gray-200);
+    font-weight: 400;
+  `,
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
@@ -30,7 +34,23 @@ const Styled = {
     justify-content: center;
     margin: 8px;
   `,
-  PageEditorWrapper: styled.div``,
+  PageEditorWrapper: styled.div`
+    margin-bottom: 48px;
+  `,
+  Footer: styled.footer`
+    display: flex;
+    gap: 24px;
+
+    a {
+      color: var(--color-gray-200);
+      text-decoration: none;
+      font-size: 13px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  `,
 }
 
 const presentationMessages = [
@@ -68,8 +88,17 @@ export const DemoLayout = ({
 
   return (
     <Styled.Wrapper>
+      <Styled.Title>Hello Fillout!</Styled.Title>
       <Styled.DemoPage>{message}</Styled.DemoPage>
       <Styled.PageEditorWrapper>{children}</Styled.PageEditorWrapper>
+      <Styled.Footer>
+        <a href="https://violapeter-website-static-assets.vercel.app/Peter%20Viola%20-%202025.pdf">
+          Peter&#39;s CV
+        </a>
+        <a href="https://violapeter.hu">Peter&#39;s website</a>
+        <a href="https://linkedin.com/in/violapeter">Peter&#39;s LinkedIn</a>
+        <a href="https://github.com/violapeter">Peter&#39;s GitHub</a>
+      </Styled.Footer>
     </Styled.Wrapper>
   )
 }
