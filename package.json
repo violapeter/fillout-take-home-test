@@ -1,5 +1,6 @@
 {
   "name": "fillout-take-home-test",
+  "private": true,
   "description": "This is my solution of the take home test for the Senior Frontend Engineer position at Fillout",
   "author": {
     "name": "Peter Viola",
