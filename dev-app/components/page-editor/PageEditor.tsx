@@ -7,6 +7,7 @@ import {
 } from '@/components/page-editor/PageEditorItem'
 import { Button, Icon } from '@fillout/ui-components'
 import { Reorder } from 'motion/react'
+import { PanInfo, resize } from 'motion'
 
 export interface Page {
   id: string
@@ -36,6 +37,23 @@ const Styled = {
     overflow: auto;
     padding: 10px 0;
     margin: 0 20px;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar:horizontal {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-gray-200);
+      border-radius: 3px;
+    }
   `,
   ReorderWrap: styled(Reorder.Item)`
     display: flex;
@@ -46,6 +64,7 @@ const Styled = {
     align-items: center;
     justify-content: center;
     width: 20px;
+    flex: 0 0 20px;
     position: relative;
     transition:
       width 0.2s ease,
@@ -102,6 +121,8 @@ export const PageEditor = ({
   onSetAsFirst,
   onCopy,
 }: PageEditorProps) => {
+  const containerRef = React.useRef<HTMLDivElement | null>(null)
+  const [resizeKey, setResizeKey] = React.useState(0)
   const [draggingId, setDraggingId] = React.useState<string | null>(null)
   const endingPages = React.useMemo(
     () => pages.filter(({ type }) => type === PageType.Ending),
@@ -119,9 +140,18 @@ export const PageEditor = ({
     [endingPages, onPageReorder],
   )
 
+  React.useEffect(() => {
+    const onResize = () => {
+      setResizeKey((prev) => prev + 1)
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper ref={containerRef}>
       <Reorder.Group
+        key={resizeKey}
         axis="x"
         values={pages}
         onReorder={handleReorder}
@@ -137,6 +167,7 @@ export const PageEditor = ({
               onDragStart={() => setDraggingId(page.id)}
               onDragEnd={() => setDraggingId(null)}
               drag={page?.type === PageType.Ending ? false : 'x'}
+              dragConstraints={containerRef}
             >
               <PageEditorItem
                 {...page}
