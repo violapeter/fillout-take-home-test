@@ -7,7 +7,6 @@ import {
 } from '@/components/page-editor/PageEditorItem'
 import { Button, Icon } from '@fillout/ui-components'
 import { Reorder } from 'motion/react'
-import { PanInfo, resize } from 'motion'
 
 export interface Page {
   id: string
