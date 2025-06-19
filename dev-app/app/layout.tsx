@@ -30,6 +30,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="43066077-83db-4f63-b0ae-7aa530b75435"
+        />
+      </head>
       <body
         className={`${inter.className} ${blMelodyMedium.variable} antialiased`}
       >
