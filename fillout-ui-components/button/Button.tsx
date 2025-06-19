@@ -22,6 +22,7 @@ const Styled = {
     gap: 8px;
     align-items: center;
     cursor: default;
+    white-space: nowrap;
 
     &:hover {
       background: rgba(157, 164, 178, 0.35);

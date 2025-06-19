@@ -3,6 +3,7 @@ import { Page, PageEditor } from '@/components/page-editor/PageEditor'
 import React from 'react'
 import { PageType } from '@/components/page-editor/PageEditorItem'
 import { Toast } from '@fillout/ui-components'
+import { DemoLayout } from '@/components/demo-components/DemoLayout'
 
 export const PageEditorDemo = () => {
   const DEFAULT_NAME = 'New Page'
@@ -107,7 +108,7 @@ export const PageEditorDemo = () => {
   }, [newlyAddedPage])
 
   return (
-    <>
+    <DemoLayout activeId={activePage}>
       <Toast.Provider swipeDirection="up">
         {message !== null && (
           <Toast.Root open onOpenChange={handleOpenChange} message={message} />
@@ -127,6 +128,6 @@ export const PageEditorDemo = () => {
         onSetAsFirst={handleSetAsFirst}
         onCopy={handleCopy}
       />
-    </>
+    </DemoLayout>
   )
 }

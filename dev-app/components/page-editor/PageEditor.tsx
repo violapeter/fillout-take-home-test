@@ -32,6 +32,10 @@ interface PageEditorProps {
 const Styled = {
   Wrapper: styled.div`
     display: flex;
+    max-width: calc(100vw - 40px);
+    overflow: auto;
+    padding: 10px 0;
+    margin: 0 20px;
   `,
   ReorderWrap: styled(Reorder.Item)`
     display: flex;

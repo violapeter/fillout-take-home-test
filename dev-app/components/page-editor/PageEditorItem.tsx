@@ -46,6 +46,7 @@ const Styled = {
     gap: 5px;
     align-items: center;
     position: relative;
+    white-space: nowrap;
     transition: transform 0.1s ease;
     transform: ${({ dragging }) => dragging && 'scale(1.05)'};
     cursor: ${({ dragging }) => (dragging ? 'grabbing' : 'hand')};
