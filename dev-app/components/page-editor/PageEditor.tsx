@@ -8,7 +8,7 @@ import {
 import { Button, Icon } from '@fillout/ui-components'
 import { Reorder } from 'motion/react'
 
-interface Page {
+export interface Page {
   id: string
   name: string
   active?: boolean

@@ -1,10 +1,12 @@
 'use client'
-import { PageEditor } from '@/components/page-editor/PageEditor'
+import { Page, PageEditor } from '@/components/page-editor/PageEditor'
 import React from 'react'
 import { PageType } from '@/components/page-editor/PageEditorItem'
 import { Toast } from '@fillout/ui-components'
 
 export const PageEditorDemo = () => {
+  const DEFAULT_NAME = 'New Page'
+
   const defaultPages = [
     {
       id: 'my-page',
@@ -27,55 +29,52 @@ export const PageEditorDemo = () => {
     null,
   )
 
-  function handleAddPage() {
-    const newId = crypto.randomUUID()
-    setPages((prev) => [
-      ...prev,
-      {
-        id: newId,
-        name: 'New page',
-      },
-    ])
-    setActivePage(newId)
-    setNewlyAddedPage(newId)
-  }
-
   function handleDeletePage(id: string) {
     setPages((prev) => prev.filter((page) => page.id !== id))
   }
 
-  function handleDuplicatePage(id: string) {
-    const newId = crypto.randomUUID()
+  function createPage(page: Page, index?: number) {
     setPages((prev) => {
-      const pageToDuplicate = prev.find((page) => page.id === id)
-      if (!pageToDuplicate) return prev
-
-      const duplicatedPage = {
-        ...pageToDuplicate,
-        id: newId,
-        name: `${pageToDuplicate.name} (copy)`,
-      }
-
-      return [...prev, duplicatedPage]
-    })
-    setActivePage(newId)
-    setNewlyAddedPage(newId)
-  }
-
-  function handleAddBetween(index: number) {
-    const newId = crypto.randomUUID()
-    setPages((prev) => {
-      const newPage = {
-        id: newId,
-        name: 'My page',
+      if (!index) {
+        return [...prev, page]
       }
 
       const newPages = [...prev]
-      newPages.splice(index, 0, newPage)
+      newPages.splice(index, 0, page)
       return newPages
     })
-    setActivePage(newId)
-    setNewlyAddedPage(newId)
+    setActivePage(page.id)
+    setNewlyAddedPage(page.id)
+  }
+
+  function handleDuplicatePage(id: string) {
+    const newId = crypto.randomUUID()
+    const pageToDuplicate = pages.find((page) => page.id === id)
+
+    if (!pageToDuplicate) return
+
+    createPage({
+      ...pageToDuplicate,
+      id: newId,
+      name: `${pageToDuplicate.name} (copy)`,
+    })
+  }
+
+  function handleAddPage() {
+    createPage({
+      id: crypto.randomUUID(),
+      name: DEFAULT_NAME,
+    })
+  }
+
+  function handleAddBetween(index: number) {
+    createPage(
+      {
+        id: crypto.randomUUID(),
+        name: DEFAULT_NAME,
+      },
+      index,
+    )
   }
 
   function handleSetAsFirst(id: string) {
