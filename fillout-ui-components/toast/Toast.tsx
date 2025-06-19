@@ -18,7 +18,7 @@ const Styled = {
     max-width: 100vw;
     margin: 0;
     list-style: none;
-    z-index: 2147483647;
+    z-index: 100;
     outline: none;
   `,
   Root: styled(RadixToast.Root)`
@@ -81,7 +81,7 @@ const Styled = {
   Description: styled(RadixToast.Description)`
     font-family: var(--font-default), sans-serif;
     font-size: 14px;
-    color: var(--color-gray-100);
+    color: var(--color-foreground);
     line-height: 1.4;
     flex: 1;
   `,
