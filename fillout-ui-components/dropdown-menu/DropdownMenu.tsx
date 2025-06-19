@@ -61,16 +61,6 @@ const Styled = {
     box-shadow: 0 0.5px 0 0 var(--color-border);
     margin: 4px 12px;
   `,
-  Trigger: styled(RadixDropdownMenu.Trigger)`
-    all: unset;
-    display: flex;
-    padding: 4px;
-    border-radius: 100%;
-
-    &:focus {
-      box-shadow: var(--focus-ring);
-    }
-  `,
 }
 
 interface ModifiedItemProps {
@@ -95,37 +85,41 @@ const ModifiedItem = ({
 
 interface ModifiedContentProps {
   heading?: string
+  referenceRef?: React.RefObject<HTMLElement | null>
 }
 
 const ModifiedContent = ({
   children,
   heading,
+  referenceRef,
   ...rest
 }: React.PropsWithChildren<
   ModifiedContentProps & RadixDropdownMenu.DropdownMenuContentProps
->) => (
-  <RadixDropdownMenu.Portal>
-    <Styled.Content {...rest}>
+>) => {
+  const inner = (
+    <>
       {heading && <Styled.Heading>{heading}</Styled.Heading>}
       <Styled.Items>{children}</Styled.Items>
-    </Styled.Content>
-  </RadixDropdownMenu.Portal>
-)
+    </>
+  )
 
-interface ModifiedTriggerProps {}
-
-const ModifiedTrigger = ({
-  children,
-  ...rest
-}: React.PropsWithChildren<
-  ModifiedTriggerProps & RadixDropdownMenu.DropdownMenuTriggerProps
->) => <Styled.Trigger {...rest}>{children}</Styled.Trigger>
+  return (
+    <RadixDropdownMenu.Portal>
+      {referenceRef ? (
+        <Styled.Content asChild {...rest}>
+          <div data-mine>{inner}</div>
+        </Styled.Content>
+      ) : (
+        <Styled.Content {...rest}>{inner}</Styled.Content>
+      )}
+    </RadixDropdownMenu.Portal>
+  )
+}
 
 const DropdownMenu = {
   ...RadixDropdownMenu,
   Content: ModifiedContent,
   Item: ModifiedItem,
-  Trigger: ModifiedTrigger,
   Separator: Styled.Separator,
 }
 

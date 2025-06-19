@@ -61,9 +61,12 @@ const Styled = {
       box-shadow: var(--focus-ring);
     }
   `,
-  DropdownTrigger: styled(DropdownMenu.Trigger, {
-    shouldForwardProp: (prop) => prop !== 'active',
-  })<{ active?: boolean }>`
+  DropdownContent: styled(DropdownMenu.Content)`
+    width: 240px;
+  `,
+  MenuOpener: styled.button<{ active?: boolean }>`
+    all: unset;
+    display: flex;
     transition:
       width 0.2s ease,
       visibility 0.2s ease,
@@ -71,9 +74,19 @@ const Styled = {
     width: ${({ active }) => (active ? '16px' : '0')};
     opacity: ${({ active }) => (active ? '1' : '0')};
     visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
+    padding: 4px;
+    border-radius: 100%;
+
+    &:focus {
+      box-shadow: var(--focus-ring);
+    }
   `,
-  DropdownContent: styled(DropdownMenu.Content)`
-    width: 240px;
+  TriggerLayer: styled(DropdownMenu.Trigger)`
+    all: unset;
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    pointer-events: none;
   `,
 }
 
@@ -90,6 +103,7 @@ export const PageEditorItem = ({
   isNewlyAdded,
   type = PageType.Default,
 }: PageEditorItemProps) => {
+  const [menuOpen, setMenuOpen] = React.useState(false)
   const [rename, setRename] = React.useState(false)
   const wrapperRef = React.useRef<HTMLDivElement>(null)
 
@@ -146,11 +160,18 @@ export const PageEditorItem = ({
         id={id}
         active={active}
       />
-      <DropdownMenu.Root>
-        <Styled.DropdownTrigger active={active}>
-          <Icon icon="DotGrid" />
-        </Styled.DropdownTrigger>
-        <Styled.DropdownContent heading="Settings">
+      <Styled.MenuOpener active={active} onMouseDown={() => setMenuOpen(true)}>
+        <Icon icon="DotGrid" />
+      </Styled.MenuOpener>
+      <DropdownMenu.Root open={menuOpen} onOpenChange={setMenuOpen}>
+        <Styled.TriggerLayer>&nbsp;</Styled.TriggerLayer>
+        <Styled.DropdownContent
+          side="top"
+          align="start"
+          sideOffset={9}
+          heading="Settings"
+          referenceRef={wrapperRef}
+        >
           <DropdownMenu.Item
             icon="Flag"
             isHighlight
