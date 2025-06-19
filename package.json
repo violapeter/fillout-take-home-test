@@ -6,7 +6,8 @@
     "email": "info@violapeter.hu"
   },
   "scripts": {
-    "dev": "npm run dev -w dev-app"
+    "dev": "npm run dev -w dev-app",
+    "build": "npm  run build -w dev-app"
   },
   "volta": {
     "node": "24.2.0"

@@ -46,7 +46,7 @@ const Styled = {
   `,
   ItemIcon: styled(Icon, {
     shouldForwardProp: (prop) => prop !== 'isHighlight',
-  })<{ isHighlight: boolean }>`
+  })<{ isHighlight?: boolean }>`
     color: ${({ isHighlight }) =>
       isHighlight ? 'var(--color-accent)' : 'var(--color-gray-100)'};
   `,
