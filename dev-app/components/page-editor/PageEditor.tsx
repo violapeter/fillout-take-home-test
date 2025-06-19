@@ -47,7 +47,9 @@ const Styled = {
     justify-content: center;
     width: 20px;
     position: relative;
-    transition: width 0.2s ease;
+    transition:
+      width 0.2s ease,
+      opacity 0.2s ease;
     opacity: ${({ dragging }) => (dragging ? 0 : 1)};
 
     &::before {
@@ -175,7 +177,7 @@ export const PageEditor = ({
               onCopy={onCopy}
             />
           ))}
-          <Styled.Between inactive />
+          <Styled.Between inactive dragging={draggingId !== null} />
         </>
       )}
       <Button icon="Plus" variant="primary" onClick={onAddPage}>
