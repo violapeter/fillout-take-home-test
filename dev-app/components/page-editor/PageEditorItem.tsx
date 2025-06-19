@@ -144,6 +144,11 @@ export const PageEditorItem = ({
     onCopy?.(id)
   }
 
+  function handleOpenMenu(event: React.MouseEvent) {
+    event.preventDefault()
+    setMenuOpen(true)
+  }
+
   return (
     <Styled.Wrapper
       dragging={dragging}
@@ -151,6 +156,7 @@ export const PageEditorItem = ({
       tabIndex={0}
       onClick={handleClick}
       ref={wrapperRef}
+      onContextMenu={handleOpenMenu}
     >
       <Styled.Icon size={20} icon={iconMap[type]} active={active} />
       <PageEditorRenameField
@@ -160,7 +166,7 @@ export const PageEditorItem = ({
         id={id}
         active={active}
       />
-      <Styled.MenuOpener active={active} onMouseDown={() => setMenuOpen(true)}>
+      <Styled.MenuOpener active={active} onMouseDown={handleOpenMenu}>
         <Icon icon="DotGrid" />
       </Styled.MenuOpener>
       <DropdownMenu.Root open={menuOpen} onOpenChange={setMenuOpen}>
