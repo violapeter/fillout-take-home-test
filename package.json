@@ -1,27 +1,20 @@
 {
   "name": "fillout-take-home-test",
-  "version": "0.1.0",
-  "private": true,
+  "description": "This is my solution of the take home test for the Senior Frontend Engineer position at Fillout",
+  "author": {
+    "name": "Peter Viola",
+    "email": "info@violapeter.hu"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "npm run dev -w dev-app"
   },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.3.3"
+  "volta": {
+    "node": "24.2.0"
   },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.3",
-    "@eslint/eslintrc": "^3"
+  "workspaces": ["dev-app", "fillout-ui-components"],
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "semi": false
   }
 }
