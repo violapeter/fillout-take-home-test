@@ -1,7 +1,7 @@
 'use client'
 import styled from '@emotion/styled'
 import { DropdownMenu, Icon } from '@fillout/ui-components'
-import { IconType } from '@fillout/ui-components/icon/Icon'
+import type { IconType } from '@fillout/ui-components'
 import React from 'react'
 import { PageEditorRenameField } from '@/components/page-editor/PageEditorRenameField'
 
@@ -150,14 +150,22 @@ export const PageEditorItem = ({
           <Icon icon="DotGrid" />
         </Styled.DropdownTrigger>
         <Styled.DropdownContent heading="Settings">
-          <DropdownMenu.Item icon="Flag" isHighlight onSelect={handleSetAsFirst}>
+          <DropdownMenu.Item
+            icon="Flag"
+            isHighlight
+            onSelect={handleSetAsFirst}
+          >
             Set as first page
           </DropdownMenu.Item>
           <DropdownMenu.Item icon="Edit" onSelect={handleSelectRename}>
             Rename
           </DropdownMenu.Item>
-          <DropdownMenu.Item icon="Copy" onSelect={handleCopy}>Copy</DropdownMenu.Item>
-          <DropdownMenu.Item icon="Duplicate" onSelect={handleDuplicate}>Duplicate</DropdownMenu.Item>
+          <DropdownMenu.Item icon="Copy" onSelect={handleCopy}>
+            Copy
+          </DropdownMenu.Item>
+          <DropdownMenu.Item icon="Duplicate" onSelect={handleDuplicate}>
+            Duplicate
+          </DropdownMenu.Item>
           <DropdownMenu.Separator />
           <DropdownMenu.Item icon="Trash" isDanger onSelect={handleDelete}>
             Delete
